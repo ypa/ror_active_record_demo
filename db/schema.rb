@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_08_030804) do
+ActiveRecord::Schema.define(version: 2020_09_08_033907) do
+
+  create_table "mailing_lists_users", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "mailing_list_id", null: false
+    t.bigint "user_id", null: false
+  end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
@@ -22,9 +27,7 @@ ActiveRecord::Schema.define(version: 2020_09_08_030804) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "qty_sold"
     t.string "ref_num"
-    t.bigint "style_id", null: false
     t.index ["ref_num"], name: "index_products_on_ref_num"
-    t.index ["style_id"], name: "index_products_on_style_id"
   end
 
   create_table "styles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -33,5 +36,4 @@ ActiveRecord::Schema.define(version: 2020_09_08_030804) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "products", "styles"
 end
